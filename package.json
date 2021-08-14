@@ -46,8 +46,8 @@
     "node": "14.15.0"
   },
   "dependencies": {
-    "object-hash": "2.1.1",
-    "rxjs": "6.6.3"
+    "object-hash": "2.2.0",
+    "rxjs": "7.3.0"
   },
   "devDependencies": {
     "@stencil/core": "2.5.2",

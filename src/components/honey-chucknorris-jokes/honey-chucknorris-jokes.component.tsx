@@ -10,7 +10,7 @@ import {fromFetch} from "rxjs/fetch";
 })
 export class HoneyChucknorrisJokes {
 
-  private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random";
+  private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random?category=dev";
 
   /**
    * Host Element

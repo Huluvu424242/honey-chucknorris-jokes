@@ -88,7 +88,7 @@ export class HoneyChucknorrisJokes {
         () => fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(catchError(() => EMPTY))
       )
     );
-    this.fetcherSubscription = fetcher$.subscribe(
+    this.fetcherSubscription = await fetcher$.subscribe(
       (response: Response) => response.json().then(data => this.setWitz(data))
     );
   }

@@ -1,0 +1,20 @@
+
+.container {
+  display: flex; /* or inline-flex */
+  align-items: center;
+  border: 1px solid var(--homey-border-color, grey);
+}
+
+.item {
+  flex: auto;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.text {
+  font-size: var(--honey-font-size, x-small);
+}

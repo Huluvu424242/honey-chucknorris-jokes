@@ -1,4 +1,4 @@
-# honey-template-header
+# honey-chucknorris-jokes-header
 
 
 
@@ -9,13 +9,13 @@
 
 ### Used by
 
- - [honey-template](..)
+ - [honey-chucknorris-jokes](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  honey-template --> honey-template-header
-  style honey-template-header fill:#f9f,stroke:#333,stroke-width:4px
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-header
+  style honey-chucknorris-jokes-header fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

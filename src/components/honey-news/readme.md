@@ -1,4 +1,4 @@
-# honey-template
+# honey-chucknorris-jokes
 
 <!-- Auto Generated Below -->
 
@@ -18,19 +18,19 @@
 
 ### Depends on
 
-- [honey-template-header](header)
-- [honey-template-feed](news)
-- [honey-template-feeds](feeds)
-- [honey-template-statistic](statistic)
+- [honey-chucknorris-jokes-header](header)
+- [honey-chucknorris-jokes-feed](news)
+- [honey-chucknorris-jokes-feeds](feeds)
+- [honey-chucknorris-jokes-statistic](statistic)
 
 ### Graph
 ```mermaid
 graph TD;
-  honey-template --> honey-template-header
-  honey-template --> honey-template-feed
-  honey-template --> honey-template-feeds
-  honey-template --> honey-template-statistic
-  style honey-template fill:#f9f,stroke:#333,stroke-width:4px
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-header
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-feed
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-feeds
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-statistic
+  style honey-chucknorris-jokes fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

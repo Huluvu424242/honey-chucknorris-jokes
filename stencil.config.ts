@@ -4,7 +4,7 @@ import {docs} from "jest-cli/build/cli/args";
 // import resolvePlugin from 'rollup-plugin-commonjs';
 
 export const config: Config = {
-  namespace: 'honey-template',
+  namespace: 'honey-chucknorris-jokes',
   globalStyle: 'src/global/variables.default.css',
   // globalScript: 'src/global/app.ts',
   testing: {

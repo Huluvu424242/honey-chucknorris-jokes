@@ -1,7 +1,7 @@
 import {newE2EPage} from '@stencil/core/testing';
 import {E2EElement, E2EPage} from "@stencil/core/testing/puppeteer/puppeteer-declarations";
 
-describe('E2E: honey-template satisfy', () => {
+describe('E2E: honey-chucknorris-jokes satisfy', () => {
 
   describe('simple check for present at page', () => {
 
@@ -9,12 +9,12 @@ describe('E2E: honey-template satisfy', () => {
     let element: E2EElement;
 
     beforeEach(async () => {
-      page = await newE2EPage({html: `<honey-template></honey-template>`});
-      element = await page.find('honey-template');
+      page = await newE2EPage({html: `<honey-chucknorris-jokes></honey-chucknorris-jokes>`});
+      element = await page.find('honey-chucknorris-jokes');
     });
 
     it('Add Feed Button is present', async () => {
-      const el = await page.find('honey-template');
+      const el = await page.find('honey-chucknorris-jokes');
       expect(el).not.toBeNull();
     });
   });

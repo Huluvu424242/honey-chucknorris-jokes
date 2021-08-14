@@ -5,7 +5,7 @@ import {from} from "rxjs";
 import {getFeedsSingleObserver} from "../../../fetch-es6.worker";
 
 @Component({
-  tag: "honey-template-feeds",
+  tag: "honey-chucknorris-jokes-feeds",
   styleUrl: "Feeds.css",
   assetsDirs: ['assets'],
   shadow: true

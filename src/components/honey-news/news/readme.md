@@ -1,4 +1,4 @@
-# honey-template
+# honey-chucknorris-jokes
 
 
 
@@ -17,7 +17,7 @@
 
 ### `updateOptions(options: NewsOptions) => Promise<void>`
 
-Update honey-template options
+Update honey-chucknorris-jokes options
 
 #### Returns
 
@@ -30,13 +30,13 @@ Type: `Promise<void>`
 
 ### Used by
 
- - [honey-template](..)
+ - [honey-chucknorris-jokes](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  honey-template --> honey-template-feed
-  style honey-template-feed fill:#f9f,stroke:#333,stroke-width:4px
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-feed
+  style honey-chucknorris-jokes-feed fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

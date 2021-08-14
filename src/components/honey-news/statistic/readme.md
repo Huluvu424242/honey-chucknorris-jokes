@@ -1,4 +1,4 @@
-# honey-template-statistic
+# honey-chucknorris-jokes-statistic
 
 
 
@@ -29,13 +29,13 @@ Type: `Promise<void>`
 
 ### Used by
 
- - [honey-template](..)
+ - [honey-chucknorris-jokes](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  honey-template --> honey-template-statistic
-  style honey-template-statistic fill:#f9f,stroke:#333,stroke-width:4px
+  honey-chucknorris-jokes --> honey-chucknorris-jokes-statistic
+  style honey-chucknorris-jokes-statistic fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

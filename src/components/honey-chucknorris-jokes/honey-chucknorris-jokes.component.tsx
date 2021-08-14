@@ -1,4 +1,4 @@
-import {Component, Element, h, Host, Prop, State} from "@stencil/core";
+import {Component, Element, h, Host, Prop, State, Watch} from "@stencil/core";
 import {Witz} from "./witz";
 import {EMPTY, Observable, Subscription, timer} from "rxjs";
 import {fromFetch} from "rxjs/fetch";
@@ -35,19 +35,17 @@ export class HoneyChucknorrisJokes {
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
    */
-  @Prop({attribute: "thema", reflect: true, mutable: true}) period: number = 20;
+  @Prop({attribute: "period",  mutable: true}) changePeriod: number = 20;
 
-
-  //
-  // @Watch("newsFeed")
-  // newsWatcher(newValue: HTMLHoneyNewsFeedElement, oldValue: HTMLHoneyNewsFeedElement) {
-  //   oldValue = oldValue;
-  //   if (newValue) {
-  //     if (this.newsFeed) {
-  //       this.newsFeed.feedLoader = this.feedLoader;
-  //     }
-  //   }
-  // }
+  @Watch("changePeriod")
+  newsWatcher(newValue:number, oldValue:number) {
+    console.log("period changed old:"+oldValue + " new:"+ newValue);
+    if (newValue && oldValue !== newValue) {
+      this.changePeriod=newValue;
+      this.updateFetcherSubscription();
+      console.log("period changed to:"+ this.changePeriod);
+    }
+  }
 
   protected setWitz(data: any): void {
     if (data) {
@@ -79,7 +77,7 @@ export class HoneyChucknorrisJokes {
     if (this.fetcherSubscription) {
       await this.fetcherSubscription.unsubscribe();
     }
-    const timerPeriod: number = this.period * 1000;
+    const timerPeriod: number = this.changePeriod * 1000;
     const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
       tap(
         () => console.log("neuer Witz um: " + (new Date().toUTCString()))

@@ -11,6 +11,26 @@
   <base href="/honey-chucknorris-jokes">
 </head>
 <body id="domo-seite">
-  <honey-chucknorris-jokes />
+<honey-chucknorris-jokes id="1"></honey-chucknorris-jokes>
+
+<script>
+  function setPeriod(){
+    const newPeriod = document.getElementById("period").value;
+    const citeElement = document.getElementById("1");
+    citeElement.setAttribute("period",newPeriod);
+  }
+</script>
+
+<section style="margin-top: 30px">
+  <label for="period">Neuer Witz in:</label>
+
+  <select name="period" id="period" onchange="setPeriod()">
+    <option value="5">5 Sekunden</option>
+    <option value="10">10 Sekunden</option>
+    <option value="20" selected>20 Sekunden</option>
+    <option value="30">30 Sekunden</option>
+    <option value="40">40 Sekunden</option>
+  </select>
+</section>
 </body>
 </html>

@@ -1,12 +1,10 @@
-import {Config} from '@stencil/core';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
-import {docs} from "jest-cli/build/cli/args";
+import {Config} from "@stencil/core";
+import nodePolyfills from "rollup-plugin-node-polyfills";
+// import {docs} from "jest-cli/build/cli/args";
 // import resolvePlugin from 'rollup-plugin-commonjs';
 
 export const config: Config = {
   namespace: 'honey-chucknorris-jokes',
-  globalStyle: 'src/global/variables.default.css',
-  // globalScript: 'src/global/app.ts',
   testing: {
     /**
      * Gitlab CI doesn't allow sandbox, therefor this parameters must be passed to your Headless Chrome
@@ -34,11 +32,6 @@ export const config: Config = {
     {
       type: 'www',
       dir: 'docs',
-      copy: [
-        { src: "demo.html"},
-        { src: "404.html"},
-        { src: "redirect.js"}
-      ],
       serviceWorker: null // disable service workers
     }
   ],

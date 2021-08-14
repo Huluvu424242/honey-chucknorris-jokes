@@ -1,5 +1,7 @@
-import {Component, Element, h, Host, Prop, State, Watch} from "@stencil/core";
-import {Subscription} from "rxjs";
+import {Component, Element, h, Host, Prop, State} from "@stencil/core";
+import {Witz} from "./witz";
+import {Observable, Subscription} from "rxjs";
+import {fromFetch} from "rxjs/fetch";
 
 @Component({
   tag: "honey-chucknorris-jokes",
@@ -7,6 +9,8 @@ import {Subscription} from "rxjs";
   shadow: true
 })
 export class HoneyChucknorrisJokes {
+
+  private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random";
 
   /**
    * Host Element
@@ -18,11 +22,19 @@ export class HoneyChucknorrisJokes {
    */
   ident: string;
 
+  fetcherSubscription: Subscription;
+
+  @State() witz: Witz = {
+    id: "4_kRvuABR7mNQZxh-_UH1A",
+    imgurl: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    website: "https://api.chucknorris.io/jokes/4_kRvuABR7mNQZxh-_UH1A",
+    text: "Chuck Norris' Ipod came with a real charger instead of just a usb cord."
+  };
+
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
    */
-  jokePeriodInSecond: number = 120;
-
+  @Prop({attribute: "period", reflect: true, mutable: true}) jokePeriodInSecond: number = 120;
 
 
   //
@@ -36,77 +48,45 @@ export class HoneyChucknorrisJokes {
   //   }
   // }
 
+  protected setWitz(data: any): void {
+    if (data) {
+      // trigger rendering nur wenn ref changed
+      this.witz = {
+        id: data.id,
+        imgurl: data.icon_url,
+        website: data.url,
+        text: data.value
+      };
+    }
+  }
+
 
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
+  }
+
+  async componentWillLoad() {
+    const fetcher$: Observable<any> = fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL);
+    this.fetcherSubscription = fetcher$.subscribe(
+      response => response.json().then(data => this.setWitz(data))
+    );
+  }
 
   public disconnectedCallback() {
-    this.routerSubscription.unsubscribe();
-  }
-
-  protected createNewTitleText(): string {
-    // if (this.) {
-    //   return this.options.disabledTitleText;
-    // } else {
-    return this.options.titleText;
-    // }
-  }
-
-  protected getTitleText(): string {
-    if (this.createTitleText) {
-      return this.createNewTitleText();
-    } else {
-      return this.hostElement.title;
-    }
-  }
-
-  protected getAriaLabel(): string {
-    if (this.createAriaLabel) {
-      return this.options.ariaLabel;
-    } else {
-      return this.hostElement.getAttribute("aria-label");
-    }
-  }
-
-  protected getHostClass(): string {
-    let hostClass = this.initialHostClass;
-    // if (this.hasNoFeeds()) {
-    //   return hostClass + " " + this.options.disabledHostClass;
-    // } else {
-    //   return hostClass + " " + this.options.enabledHostClass;
-    // }
-    return hostClass;
+    this.fetcherSubscription.unsubscribe();
   }
 
 
   public render() {
-    Logger.debugMessage('##RENDER##');
-
     return (
       <Host
-        title={this.getTitleText()}
-        aria-label={this.getAriaLabel()}
-        // tabindex={this.hasNoFeeds() ? -1 : this.taborder}
-        // class={this.getHostClass()}
-        // disabled={this.hasNoFeeds()}
-        class="paper"
+        id={this.ident}
       >
-
-        <honey-chucknorris-jokes-header/>
-
-        {!this.route || this.route === "/" || this.route === "/index.html" || this.route === "/news" ? <honey-chucknorris-jokes-feed ref={(el) => {
-          // @ts-ignore
-          this.newsFeed = el as HTMLHoneyNewsFeedElement
-        }}/> : null}
-        {this.route === "/feeds" ? <honey-chucknorris-jokes-feeds ref={(el) => {
-          // @ts-ignore
-          this.feedAdministration = el as HTMLHoneyNewsFeedsElement
-        }
-        }/> : null}
-        {this.route === "/statistic" ? <honey-chucknorris-jokes-statistic/> : null}
-        {this.route === "/about" ? <About/> : null}
-
+        <a href={this.witz.website} class={"container"} target={"blank"}>
+          <img src={this.witz.imgurl} class={"item logo"}/>
+          <p class={"item text"}>{this.witz.text}</p>
+        </a>
       </Host>
     );
   }

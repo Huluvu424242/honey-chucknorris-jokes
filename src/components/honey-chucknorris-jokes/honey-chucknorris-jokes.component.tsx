@@ -1,7 +1,8 @@
 import {Component, Element, h, Host, Prop, State} from "@stencil/core";
 import {Witz} from "./witz";
-import {Observable, Subscription} from "rxjs";
+import {EMPTY, Observable, Subscription, timer} from "rxjs";
 import {fromFetch} from "rxjs/fetch";
+import {catchError, switchMap, tap} from "rxjs/operators";
 
 @Component({
   tag: "honey-chucknorris-jokes",
@@ -10,7 +11,7 @@ import {fromFetch} from "rxjs/fetch";
 })
 export class HoneyChucknorrisJokes {
 
-  private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random?category=dev";
+  private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random";
 
   /**
    * Host Element
@@ -34,7 +35,7 @@ export class HoneyChucknorrisJokes {
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
    */
-  @Prop({attribute: "period", reflect: true, mutable: true}) jokePeriodInSecond: number = 120;
+  @Prop({attribute: "thema", reflect: true, mutable: true}) period: number = 20;
 
 
   //
@@ -67,16 +68,30 @@ export class HoneyChucknorrisJokes {
   }
 
   async componentWillLoad() {
-    const fetcher$: Observable<any> = fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL);
-    this.fetcherSubscription = fetcher$.subscribe(
-      response => response.json().then(data => this.setWitz(data))
-    );
+    await this.updateFetcherSubscription();
   }
 
   public disconnectedCallback() {
     this.fetcherSubscription.unsubscribe();
   }
 
+  async updateFetcherSubscription() {
+    if (this.fetcherSubscription) {
+      await this.fetcherSubscription.unsubscribe();
+    }
+    const timerPeriod: number = this.period * 1000;
+    const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
+      tap(
+        () => console.log("neuer Witz um: " + (new Date().toUTCString()))
+      ),
+      switchMap(
+        () => fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(catchError(() => EMPTY))
+      )
+    );
+    this.fetcherSubscription = fetcher$.subscribe(
+      (response: Response) => response.json().then(data => this.setWitz(data))
+    );
+  }
 
   public render() {
     return (

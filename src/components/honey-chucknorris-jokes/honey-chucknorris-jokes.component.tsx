@@ -25,12 +25,13 @@ export class HoneyChucknorrisJokes {
 
   fetcherSubscription: Subscription;
 
-  @State() witz: Witz = {
-    id: "4_kRvuABR7mNQZxh-_UH1A",
-    imgurl: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
-    website: "https://api.chucknorris.io/jokes/4_kRvuABR7mNQZxh-_UH1A",
-    text: "Chuck Norris' Ipod came with a real charger instead of just a usb cord."
-  };
+  @State() witz: Witz;
+  // {
+  //   id: "4_kRvuABR7mNQZxh-_UH1A",
+  //   imgurl: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+  //   website: "https://api.chucknorris.io/jokes/4_kRvuABR7mNQZxh-_UH1A",
+  //   text: "Chuck Norris' Ipod came with a real charger instead of just a usb cord."
+  // };
 
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
@@ -58,7 +59,6 @@ export class HoneyChucknorrisJokes {
       };
     }
   }
-
 
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig

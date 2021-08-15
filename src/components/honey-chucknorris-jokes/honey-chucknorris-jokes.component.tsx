@@ -35,15 +35,15 @@ export class HoneyChucknorrisJokes {
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
    */
-  @Prop({attribute: "period",  mutable: true}) changePeriod: number = 20;
+  @Prop({attribute: "period", mutable: true}) changePeriod: number = 20;
 
   @Watch("changePeriod")
-  newsWatcher(newValue:number, oldValue:number) {
-    console.log("period changed old:"+oldValue + " new:"+ newValue);
+  newsWatcher(newValue: number, oldValue: number) {
+    console.log("period changed old:" + oldValue + " new:" + newValue);
     if (newValue && oldValue !== newValue) {
-      this.changePeriod=newValue;
+      this.changePeriod = newValue;
       this.subscribeFetcher();
-      console.log("period changed to:"+ this.changePeriod);
+      console.log("period changed to:" + this.changePeriod);
     }
   }
 
@@ -64,14 +64,16 @@ export class HoneyChucknorrisJokes {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.subscribeFetcher();
+    console.log("DOM connected um: " + (new Date().toUTCString()));
   }
 
   async componentWillLoad() {
-
+    console.log("Lade Daten um:  " + (new Date().toUTCString()));
   }
 
   public disconnectedCallback() {
     this.fetcherSubscription.unsubscribe();
+    console.log("DOM disconnected um: " + (new Date().toUTCString()));
   }
 
   async subscribeFetcher() {

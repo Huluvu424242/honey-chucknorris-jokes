@@ -31,12 +31,13 @@ export class HoneyChucknorrisJokes {
 
   fetcherSubscription: Subscription;
 
+  // Falls fachlich möglich Defaults hinterlegen um Logik einfach zu halten
   @State() witz: Witz;
 
   /**
    * Zeitintervall nachdem ein neuer Witz abgerufen wird (in Sekunden).
    */
-  @Prop({attribute: "period", mutable: true}) changePeriod: number = 20;
+  @Prop({attribute: "period", reflect: false, mutable: true}) changePeriod: number = 20;
 
   @Watch("changePeriod")
   periodWatcher(newValue: number, oldValue: number) {
@@ -53,31 +54,32 @@ export class HoneyChucknorrisJokes {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
     this.fetcherSubscription = this.subscribePeriodicFetcher();
-    this.printMessage("DOM connected um: " + (new Date().toUTCString()));
+    this.printMessage("DOM connected");
   }
 
   public async componentWillLoad() {
-    this.printMessage("Lade Daten um:  " + (new Date().toUTCString()));
-    // TODO: Fehler beim ersten Fetch -> F5 sonst kein Rendering
+    // async damit vor Rendering auf das Laden der Daten gewartet wird
+    this.printMessage("Lade Daten" + (new Date().toUTCString()));
+    // Fehler behandeln -> sonst dauerhaft kein Rendering
     await lastValueFrom(this.fetchWitz$()).catch(() => {
       this.setWitz(HoneyChucknorrisJokes.FALLBACK_WITZ)
     });
-    this.printMessage("Daten geladen um:  " + (new Date().toUTCString()));
+    this.printMessage("Daten geladen");
   }
 
   public disconnectedCallback() {
     this.fetcherSubscription.unsubscribe();
-    this.printMessage("DOM disconnected um: " + (new Date().toUTCString()));
+    this.printMessage("DOM disconnected");
   }
 
   protected printMessage(message: string): void {
     if (console) {
-      console.log(message);
+      console.log((new Date().toUTCString()) + ": " + message);
     }
   }
 
   protected setWitz(data: any): void {
-    this.printMessage("setze neuen  Witz um: " + (new Date().toUTCString()))
+    this.printMessage("setze neuen  Witz")
     if (data) {
       // trigger rendering nur wenn ref changed
       this.witz = {
@@ -87,7 +89,7 @@ export class HoneyChucknorrisJokes {
         text: data.value
       };
     } else {
-      this.printMessage("konnte Witz nicht setzen um: " + (new Date().toUTCString()))
+      this.printMessage("konnte Witz nicht setzen" )
     }
   }
 
@@ -107,17 +109,19 @@ export class HoneyChucknorrisJokes {
     const timerPeriod: number = this.changePeriod * 1000;
     const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
       tap(
-        () => this.printMessage("neuen Witz angefordert um: " + (new Date().toUTCString()))
+        () => this.printMessage("neuen Witz angefordert")
       ),
-      switchMap(
-        () => this.fetchWitz$()
-      ),
-    );
+      switchMap
+    (
+      () => this.fetchWitz$()
+    ),
+  )
+    ;
     return fetcher$.subscribe();
   }
 
   public render() {
-    this.printMessage("rendering um: " + (new Date().toUTCString()));
+    this.printMessage("rendering");
     return (
       <Host
         id={this.ident}

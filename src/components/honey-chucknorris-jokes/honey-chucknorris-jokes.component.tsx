@@ -1,6 +1,6 @@
 import {Component, Element, h, Host, Prop, State, Watch} from "@stencil/core";
 import {Witz} from "./witz";
-import {EMPTY, Observable, Subscription, timer} from "rxjs";
+import {EMPTY, lastValueFrom, Observable, Subscription, timer} from "rxjs";
 import {fromFetch} from "rxjs/fetch";
 import {catchError, switchMap, tap} from "rxjs/operators";
 
@@ -42,7 +42,7 @@ export class HoneyChucknorrisJokes {
     console.log("period changed old:" + oldValue + " new:" + newValue);
     if (newValue && oldValue !== newValue) {
       this.changePeriod = newValue;
-      this.subscribeFetcher();
+      this.subscribePeriodicFetcher();
       console.log("period changed to:" + this.changePeriod);
     }
   }
@@ -63,12 +63,14 @@ export class HoneyChucknorrisJokes {
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
-    this.subscribeFetcher();
+    this.subscribePeriodicFetcher();
     console.log("DOM connected um: " + (new Date().toUTCString()));
   }
 
-  async componentWillLoad() {
+  public async componentWillLoad() {
     console.log("Lade Daten um:  " + (new Date().toUTCString()));
+    await lastValueFrom(this.fetchWitz());
+    console.log("Daten geladen um:  " + (new Date().toUTCString()));
   }
 
   public disconnectedCallback() {
@@ -76,20 +78,21 @@ export class HoneyChucknorrisJokes {
     console.log("DOM disconnected um: " + (new Date().toUTCString()));
   }
 
-  async subscribeFetcher() {
-    // if (this.fetcherSubscription) {
-    //   await this.fetcherSubscription.unsubscribe();
-    // }
+  protected fetchWitz(): Observable<Response> {
+    return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(catchError(() => EMPTY))
+  }
+
+  protected subscribePeriodicFetcher(): Subscription {
     const timerPeriod: number = this.changePeriod * 1000;
     const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
       tap(
         () => console.log("neuer Witz um: " + (new Date().toUTCString()))
       ),
       switchMap(
-        () => fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(catchError(() => EMPTY))
+        () => this.fetchWitz()
       )
     );
-    this.fetcherSubscription = await fetcher$.subscribe(
+    return fetcher$.subscribe(
       (response: Response) => response.json().then(data => this.setWitz(data))
     );
   }

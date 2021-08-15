@@ -59,8 +59,7 @@ export class HoneyChucknorrisJokes {
   public async componentWillLoad() {
     this.printMessage("Lade Daten um:  " + (new Date().toUTCString()));
     // TODO: Fehler beim ersten Fetch -> F5 sonst kein Rendering
-    await lastValueFrom(this.fetchWitz$()).then(() => {
-    }, () => {
+    await lastValueFrom(this.fetchWitz$()).catch(() => {
       this.setWitz(HoneyChucknorrisJokes.FALLBACK_WITZ)
     });
     this.printMessage("Daten geladen um:  " + (new Date().toUTCString()));

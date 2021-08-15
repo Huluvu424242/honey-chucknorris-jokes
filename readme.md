@@ -58,10 +58,6 @@ To the [live demo](https://huluvu424242.github.io/honey-chucknorris-jokes/index.
 
 ### vX.X.X unpublished
 
-### v1.0.0 unpublished
-
-* 
-
 ### v0.0.1 published at 2021-08-15
 
 * [issue 4](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/4) setup project

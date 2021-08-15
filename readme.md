@@ -41,13 +41,7 @@ To the [demo site](https://huluvu424242.github.io/honey-chucknorris-jokes/index.
 <body id="seite" style="display: block">
 
 <h1>Nutzung der honey-chucknorris-jokes Komponente</h1>
-<span class="wichtig">!!!</span> Das ist eine Demo Seite welche alle Feature der App zeigen soll - aus diesem Grund ist auch die Statistik eingeschaltet <span class="wichtig">!!!</span><br>
-Es werden nur Daten zu den abgerufenen Feeds gespeichert (in memory) wie: url, anzahl der abfragen, anzahl valider responses<br>
-Sollten Sie die Speicherung nicht wünschen - dann geben Sie bitte keinen neuen News ein.<br>
-Vielen Dank für Ihr Verständnis. <br>
-<hr>
 <honey-chucknorris-jokes />
-
 </body>
 ```
 To the [live demo](https://huluvu424242.github.io/honey-chucknorris-jokes/index.html)
@@ -68,25 +62,9 @@ To the [live demo](https://huluvu424242.github.io/honey-chucknorris-jokes/index.
 
 * 
 
-### v0.0.4 published at 2021-05-02
+### v0.0.1 published at 2021-08-15
 
-* [issue 10](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/10) cleanup
-* finalizing layout
-
-### v0.0.3 published at 2021-04-25
-
-* [issue 16](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/16) add feed working
-* [issue 13](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/13) routing added
-* [issue 11](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/11) split into multiple webcomponents
-
-### v0.0.2 published at 2021-04-11
-
-* developer release DO NOT USE
-
-### v0.0.1 published at 2021-03-15
-
-* [issue 2](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/2) use heroku backend container
-* setup project based at https://github.com/ionic-team/stencil-component-starter rating-stencil-component
+* [issue 1](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/1) setup project
 
 ## warranty
 
@@ -98,10 +76,8 @@ MIT License
 
 ## technology used
 
-* [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 * [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements)
 * [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
-* [Shadow Parts](https://developer.mozilla.org/de/docs/Web/CSS/::part)
 
 
 ## browser support
@@ -117,12 +93,6 @@ Generell
 ### CSS Custom Properties
 
 * [Can I use with browsers?](https://caniuse.com/#search=css%20custom%20properties)
-
-### Shadow Parts
-
-Firefox
-
-Maybe you must via about:config set the layout.css.shadow-parts.enabled to true.
 
 Generell 
 

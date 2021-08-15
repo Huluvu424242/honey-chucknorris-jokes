@@ -103,6 +103,7 @@ export class HoneyChucknorrisJokes {
   }
 
   public render() {
+    console.log("rendering um: " + (new Date().toUTCString()));
     return (
       <Host
         id={this.ident}

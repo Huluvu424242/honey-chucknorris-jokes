@@ -17,7 +17,7 @@ export class HoneyChucknorrisJokes {
     imgurl: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
     website: "https://api.chucknorris.io/jokes/4_kRvuABR7mNQZxh-_UH1A",
     text: "Chuck Norris' Ipod came with a real charger instead of just a usb cord."
-  }
+  };
 
   /**
    * Host Element
@@ -79,7 +79,7 @@ export class HoneyChucknorrisJokes {
   }
 
   protected setWitz(data: any): void {
-    this.printMessage("setze neuen  Witz")
+    this.printMessage("setze neuen  Witz");
     if (data) {
       // trigger rendering nur wenn ref changed
       this.witz = {
@@ -89,7 +89,7 @@ export class HoneyChucknorrisJokes {
         text: data.value
       };
     } else {
-      this.printMessage("konnte Witz nicht setzen" )
+      this.printMessage("konnte Witz nicht setzen")
     }
   }
 
@@ -112,10 +112,10 @@ export class HoneyChucknorrisJokes {
         () => this.printMessage("neuen Witz angefordert")
       ),
       switchMap
-    (
-      () => this.fetchWitz$()
-    ),
-  )
+      (
+        () => this.fetchWitz$()
+      ),
+      )
     ;
     return fetcher$.subscribe();
   }
@@ -127,7 +127,7 @@ export class HoneyChucknorrisJokes {
         id={this.ident}
       >
         <a href={this.witz.website} class={"container"} target={"blank"}>
-          <img src={this.witz.imgurl} class={"item logo"}/>
+          <img alt="funny icon of chuck norris" src={this.witz.imgurl} class={"item logo"}/>
           <p class={"item text"}>{this.witz.text}</p>
         </a>
       </Host>

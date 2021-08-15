@@ -127,7 +127,7 @@ export class HoneyChucknorrisJokes {
         id={this.ident}
       >
         <a href={this.witz.website} class={"container"} target={"blank"}>
-          <img alt="funny icon of chuck norris" title="Chuck Norris" src={this.witz.imgurl} class={"item logo"}/>
+          <img alt="Chuck" title="Funny icon of Chuck Norris" src={this.witz.imgurl} class={"item logo"}/>
           <p class={"item text"}>{this.witz.text}</p>
         </a>
       </Host>

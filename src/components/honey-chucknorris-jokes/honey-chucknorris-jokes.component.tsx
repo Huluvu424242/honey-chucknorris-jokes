@@ -1,6 +1,6 @@
 import {Component, Element, h, Host, Prop, State, Watch} from "@stencil/core";
 import {Witz} from "./witz";
-import {EMPTY, lastValueFrom, Observable, Subscription, timer} from "rxjs";
+import {EMPTY, from, lastValueFrom, Observable, Subscription, timer} from "rxjs";
 import {fromFetch} from "rxjs/fetch";
 import {catchError, switchMap, tap} from "rxjs/operators";
 
@@ -83,8 +83,11 @@ export class HoneyChucknorrisJokes {
   protected fetchWitz(): Observable<Response> {
     return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(
       catchError(() => EMPTY),
+      switchMap(
+        () => (response: Response) => from(response.json())
+      ),
       tap(
-        (response: Response) => response.json().then(data => this.setWitz(data))
+        (data: any) => this.setWitz(data)
       )
     )
   }

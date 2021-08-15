@@ -63,7 +63,7 @@ export class HoneyChucknorrisJokes {
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
-    this.subscribePeriodicFetcher();
+    this.fetcherSubscription = this.subscribePeriodicFetcher();
     console.log("DOM connected um: " + (new Date().toUTCString()));
   }
 

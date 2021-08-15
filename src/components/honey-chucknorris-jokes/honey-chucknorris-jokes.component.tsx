@@ -69,7 +69,9 @@ export class HoneyChucknorrisJokes {
 
   public async componentWillLoad() {
     console.log("Lade Daten um:  " + (new Date().toUTCString()));
-    await lastValueFrom(timer(5000).pipe(switchMap(() => this.fetchWitz())));
+    // Für Anschauungszecke von verzögertem Rendering nächste Zeile nutzen oder inet drosseln
+    // await lastValueFrom(timer(5000).pipe(switchMap(() => this.fetchWitz())));
+    await lastValueFrom(this.fetchWitz());
     console.log("Daten geladen um:  " + (new Date().toUTCString()));
   }
 

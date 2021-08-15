@@ -64,7 +64,7 @@ To the [live demo](https://huluvu424242.github.io/honey-chucknorris-jokes/index.
 
 ### v0.0.1 published at 2021-08-15
 
-* [issue 1](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/1) setup project
+* [issue 4](https://github.com/Huluvu424242/honey-chucknorris-jokes/issues/4) setup project
 
 ## warranty
 

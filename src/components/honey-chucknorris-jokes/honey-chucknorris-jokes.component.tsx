@@ -42,7 +42,7 @@ export class HoneyChucknorrisJokes {
     console.log("period changed old:"+oldValue + " new:"+ newValue);
     if (newValue && oldValue !== newValue) {
       this.changePeriod=newValue;
-      this.updateFetcherSubscription();
+      this.subscribeFetcher();
       console.log("period changed to:"+ this.changePeriod);
     }
   }
@@ -63,20 +63,21 @@ export class HoneyChucknorrisJokes {
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
+    this.subscribeFetcher();
   }
 
   async componentWillLoad() {
-    await this.updateFetcherSubscription();
+
   }
 
   public disconnectedCallback() {
     this.fetcherSubscription.unsubscribe();
   }
 
-  async updateFetcherSubscription() {
-    if (this.fetcherSubscription) {
-      await this.fetcherSubscription.unsubscribe();
-    }
+  async subscribeFetcher() {
+    // if (this.fetcherSubscription) {
+    //   await this.fetcherSubscription.unsubscribe();
+    // }
     const timerPeriod: number = this.changePeriod * 1000;
     const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
       tap(

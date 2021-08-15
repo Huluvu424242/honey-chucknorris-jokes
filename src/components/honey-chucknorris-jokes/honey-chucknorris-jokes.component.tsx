@@ -68,12 +68,9 @@ export class HoneyChucknorrisJokes {
   }
 
   public async componentWillLoad() {
-    setTimeout(async () => {
-        console.log("Lade Daten um:  " + (new Date().toUTCString()));
-        await lastValueFrom(this.fetchWitz());
-        console.log("Daten geladen um:  " + (new Date().toUTCString()));
-      }
-      , 5000);
+    console.log("Lade Daten um:  " + (new Date().toUTCString()));
+    await lastValueFrom(timer(5000).pipe(switchMap(() => this.fetchWitz())));
+    console.log("Daten geladen um:  " + (new Date().toUTCString()));
   }
 
   public disconnectedCallback() {

@@ -84,7 +84,7 @@ export class HoneyChucknorrisJokes {
     return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(
       catchError(() => EMPTY),
       switchMap(
-        () => (response: Response) => response.json()
+        (response: Response) => response.json()
       ),
       tap(
         (data: any) => this.setWitz(data)

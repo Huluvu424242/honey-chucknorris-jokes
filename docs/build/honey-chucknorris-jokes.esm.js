@@ -1,1 +1,1 @@
-import{p as e,b as o}from"./p-76b0f29c.js";(()=>{const o=import.meta.url,r={};return""!==o&&(r.resourcesUrl=new URL(".",o).href),e(r)})().then((e=>o([["p-5eb9de85",[[1,"honey-chucknorris-jokes",{changePeriod:[1026,"period"],witz:[32]}]]]],e)));
+import{p as o,b as r}from"./p-76b0f29c.js";(()=>{const r=import.meta.url,e={};return""!==r&&(e.resourcesUrl=new URL(".",r).href),o(e)})().then((o=>r([["p-367bbef2",[[1,"honey-chucknorris-jokes",{changePeriod:[1026,"period"],witz:[32]}]]]],o)));

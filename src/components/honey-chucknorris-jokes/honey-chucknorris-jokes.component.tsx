@@ -1,6 +1,6 @@
 import {Component, Element, h, Host, Prop, State, Watch} from "@stencil/core";
 import {Witz} from "./witz";
-import {EMPTY, from, lastValueFrom, Observable, Subscription, timer} from "rxjs";
+import {EMPTY, lastValueFrom, Observable, Subscription, timer} from "rxjs";
 import {fromFetch} from "rxjs/fetch";
 import {catchError, switchMap, tap} from "rxjs/operators";
 
@@ -12,6 +12,12 @@ import {catchError, switchMap, tap} from "rxjs/operators";
 export class HoneyChucknorrisJokes {
 
   private static readonly CHUCK_NORRIS_API_URL: string = "https://api.chucknorris.io/jokes/random";
+  private static readonly FALLBACK_WITZ: Witz = {
+    id: "4_kRvuABR7mNQZxh-_UH1A",
+    imgurl: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    website: "https://api.chucknorris.io/jokes/4_kRvuABR7mNQZxh-_UH1A",
+    text: "Chuck Norris' Ipod came with a real charger instead of just a usb cord."
+  }
 
   /**
    * Host Element
@@ -53,7 +59,10 @@ export class HoneyChucknorrisJokes {
   public async componentWillLoad() {
     this.printMessage("Lade Daten um:  " + (new Date().toUTCString()));
     // TODO: Fehler beim ersten Fetch -> F5 sonst kein Rendering
-    await lastValueFrom(this.fetchWitz$());
+    await lastValueFrom(this.fetchWitz$()).then(() => {
+    }, () => {
+      this.setWitz(HoneyChucknorrisJokes.FALLBACK_WITZ)
+    });
     this.printMessage("Daten geladen um:  " + (new Date().toUTCString()));
   }
 
@@ -86,8 +95,12 @@ export class HoneyChucknorrisJokes {
   protected fetchWitz$(): Observable<Response> {
     return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(
       switchMap(
-        (response: Response) => from(response.json()).pipe(tap((data: any) => this.setWitz(data)), catchError(() => EMPTY))
-      )
+        (response: Response) => response.json()
+      ),
+      tap(
+        (data: any) => this.setWitz(data)
+      ),
+      catchError(() => EMPTY)
     )
   }
 

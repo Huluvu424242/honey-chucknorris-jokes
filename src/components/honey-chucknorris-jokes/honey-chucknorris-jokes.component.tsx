@@ -48,18 +48,6 @@ export class HoneyChucknorrisJokes {
     }
   }
 
-  protected setWitz(data: any): void {
-    if (data) {
-      // trigger rendering nur wenn ref changed
-      this.witz = {
-        id: data.id,
-        imgurl: data.icon_url,
-        website: data.url,
-        text: data.value
-      };
-    }
-  }
-
   public connectedCallback() {
     // attribute initialisieren wenn defaults notwendig
     this.ident = this.hostElement.id ? this.hostElement.id : Math.random().toString(36).substring(7);
@@ -78,6 +66,18 @@ export class HoneyChucknorrisJokes {
   public disconnectedCallback() {
     this.fetcherSubscription.unsubscribe();
     console.log("DOM disconnected um: " + (new Date().toUTCString()));
+  }
+
+  protected setWitz(data: any): void {
+    if (data) {
+      // trigger rendering nur wenn ref changed
+      this.witz = {
+        id: data.id,
+        imgurl: data.icon_url,
+        website: data.url,
+        text: data.value
+      };
+    }
   }
 
   protected fetchWitz(): Observable<Response> {

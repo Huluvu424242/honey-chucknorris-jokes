@@ -79,22 +79,25 @@ export class HoneyChucknorrisJokes {
   }
 
   protected fetchWitz(): Observable<Response> {
-    return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(catchError(() => EMPTY))
+    return fromFetch(HoneyChucknorrisJokes.CHUCK_NORRIS_API_URL).pipe(
+      catchError(() => EMPTY),
+      tap(
+        (response: Response) => response.json().then(data => this.setWitz(data))
+      )
+    )
   }
 
   protected subscribePeriodicFetcher(): Subscription {
     const timerPeriod: number = this.changePeriod * 1000;
     const fetcher$: Observable<Response> = timer(timerPeriod, timerPeriod).pipe(
       tap(
-        () => console.log("neuer Witz um: " + (new Date().toUTCString()))
+        () => console.log("neuen Witz angefordert um: " + (new Date().toUTCString()))
       ),
       switchMap(
         () => this.fetchWitz()
       )
     );
-    return fetcher$.subscribe(
-      (response: Response) => response.json().then(data => this.setWitz(data))
-    );
+    return fetcher$.subscribe();
   }
 
   public render() {

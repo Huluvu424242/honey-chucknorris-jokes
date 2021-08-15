@@ -18,7 +18,7 @@ npm install --save @huluvu424242/honey-chucknorris-jokes
 ```html
 <script 
     type="module" 
-    src='https://unpkg.com/@huluvu424242/honey-chucknorris-jokes@0.0.1/dist/honey-chucknorris-jokes/honey-chucknorris-jokes.js'>
+    src='https://unpkg.com/@huluvu424242/honey-chucknorris-jokes@0.0.1/dist/honey-chucknorris-jokes/honey-chucknorris-jokes.esm.js'>
 </script>
 ```
 To the [demo site](https://huluvu424242.github.io/honey-chucknorris-jokes/index.html)

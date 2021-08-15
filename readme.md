@@ -6,8 +6,7 @@
 [![Donate with paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://paypal.me/huluvu424242)
 ![Keybase BTC](https://img.shields.io/keybase/btc/huluvu424242)
 # honey-chucknorris-jokes 
-This project contains web components to build an news feed reader at an web site.
-(currently under development - unready and unstable)
+This project contains web components to show chuck norris jokes.
 
 ## installation
 

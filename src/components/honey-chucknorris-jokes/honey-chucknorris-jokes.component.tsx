@@ -59,7 +59,7 @@ export class HoneyChucknorrisJokes {
 
   public async componentWillLoad() {
     // async damit vor Rendering auf das Laden der Daten gewartet wird
-    this.printMessage("Lade Daten" + (new Date().toUTCString()));
+    this.printMessage("Lade Daten");
     // Fehler behandeln -> sonst dauerhaft kein Rendering
     await lastValueFrom(this.fetchWitz$()).catch(() => {
       this.setWitz(HoneyChucknorrisJokes.FALLBACK_WITZ)

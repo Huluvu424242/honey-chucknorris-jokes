@@ -1,7 +1,7 @@
 {
   "name": "@huluvu424242/honey-chucknorris-jokes",
   "version": "0.0.1",
-  "description": "News reader web component for custom urls.",
+  "description": "Webcomponent to show chuck norris jokes",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -20,9 +20,9 @@
   },
   "keywords": [
     "honey",
-    "news",
-    "rss",
-    "atom",
+    "chuck",
+    "norris",
+    "jokes",
     "webcomponent",
     "custom-element"
   ],

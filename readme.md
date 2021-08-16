@@ -77,10 +77,6 @@ MIT License
 
 ## browser support
 
-Generell
-
-* [Can I use with browsers?](https://caniuse.com/#feat=speech-synthesis)
-
 ### Custom Elements
 
 * [Can I use with browsers?](https://caniuse.com/#feat=mdn-api_window_customelements)
@@ -88,7 +84,3 @@ Generell
 ### CSS Custom Properties
 
 * [Can I use with browsers?](https://caniuse.com/#search=css%20custom%20properties)
-
-Generell 
-
-* [Can I use with browsers?](https://caniuse.com/#feat=mdn-css_selectors_part)
